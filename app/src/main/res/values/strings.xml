@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Salud Activa · Mi perfil</string>
+    <string name="login_title">Tu salud, en un solo lugar</string>
+    <string name="login_subtitle">Inicia sesión para consultar y actualizar tu perfil de Salud Activa.</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="profile_title">Mi perfil de salud</string>
+    <string name="profile_intro">Mantén tus datos de contacto actualizados.</string>
+    <string name="full_name">Nombre completo</string>
+    <string name="phone">Teléfono</string>
+    <string name="email_label">Correo electrónico</string>
+    <string name="edit_profile">Editar datos</string>
+    <string name="save">Guardar cambios</string>
+    <string name="cancel">Cancelar</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="name_required">Ingresa tu nombre.</string>
+    <string name="phone_invalid">Ingresa un número telefónico válido.</string>
+    <string name="loading">Cargando…</string>
+    <string name="profile_updated">Perfil actualizado.</string>
+    <string name="session_expired">Tu sesión ha expirado. Inicia sesión de nuevo.</string>
+    <string name="request_error">No se pudo completar la solicitud. Intenta de nuevo.</string>
+    <string name="connection_error">No se pudo conectar con el servidor. Intenta de nuevo.</string>
+</resources>
