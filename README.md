@@ -1,25 +1,49 @@
-# appt-mgmt-personal-health-app
+# Salud Activa — Personal Health App
 
-> personal-health bounded context: mobile UI (remote)
+Aplicación Android independiente para consultar y actualizar los datos de contacto del perfil de
+Salud Activa. Este repositorio implementa la interfaz móvil del bounded context `personal-health`.
 
-Part of the **LMS Library** distributed system — team `lms-library`, Grupo 2.
-Governance and documentation live in [`library-docs`](https://github.com/code-corhuila/library-docs).
+## Funcionalidad
 
-## Branching
+- Inicio de sesión en Salud Activa con credenciales existentes.
+- Persistencia cifrada del token JWT y los datos básicos del usuario.
+- Vista del nombre, correo y teléfono asociados a la cuenta.
+- Edición del nombre y teléfono con validación antes de sincronizar.
+- Cierre de sesión y manejo de sesión expirada.
 
-Three permanent branches. **None of them accepts a direct commit** — you enter through a child
-branch and leave through a Pull Request.
+El backend actual solo define `nombre`, `email` y `telefono` para el usuario. La app no inventa ni
+persiste campos clínicos como alergias o grupo sanguíneo que el servicio no soporta. El correo se
+muestra como dato de cuenta y no es editable en este flujo.
 
+## Requisitos y ejecución
+
+- Android Studio con Android SDK 34.
+- JDK 17.
+- Emulador o dispositivo Android 7.0 (API 24) o superior.
+
+```powershell
+.\gradlew.bat testDebugUnitTest assembleDebug
 ```
-develop  <--PR--  feat/... fix/... chore/...
-qa       <--PR--  qa/...
-main     <--PR--  release/...  hotfix/...
-```
 
-Promotion happens **by re-application** (`git cherry-pick -x`), never by merging one permanent
-branch into another: `merge develop -> qa` and `merge qa -> main` do not exist in this model.
+La URL predeterminada de la API es
+`https://saludactiva-backend.onrender.com/`. Se puede sustituir con
+`-PAPI_BASE_URL=https://api.example.com/`.
 
-`main` requires **1 approval from `ariel5253`**. On `develop` and `qa` the team sets its own review
-rule.
+## API utilizada
 
-Full policy: `00-governance/branching-policy.md` in `library-docs`.
+| Operación | Método y ruta |
+|---|---|
+| Iniciar sesión | `POST /api/auth/login` |
+| Actualizar el perfil autenticado | `PUT /api/auth/profile` |
+
+El inicio de sesión usa el cuerpo `email` / `contrasena` y recibe `token` y `usuario`. La
+actualización envía `nombre` y `telefono`; la identidad se deriva del JWT y no de un ID enviado por
+el cliente.
+
+## Flujo del repositorio
+
+Los cambios entran por ramas `hu-xxx-dev` y Pull Request a `develop`. La promoción a `qa` y luego
+`main` se realiza por Pull Requests y re-aplicación del cambio (`git cherry-pick -x`), según la
+gobernanza del curso en
+[`library-docs`](https://github.com/code-corhuila/library-docs). No se deben modificar directamente
+las ramas protegidas.
